@@ -1,0 +1,36 @@
+Fatores fundadmentais
+
+- Qualidade
+
+- Confiança
+
+- Tempo
+
+Fases dos teste
+
+Análise de requisitos
+Plano de teste
+Caso de teste
+Ambiente de teste
+Implementação
+
+Testes estáticos
+
+// ***************
+instala o eslint@8.16.0
+comando para teste => npx eslint --init
+
+// responder no terminal
+npx  eslint --init
+> To check syntax, find problems, and enforce code style
+> JavaScript modules (import/export)
+> None of these
+> No
+> Node
+> Use a popular style guide
+> Airbnb
+> JSON
+
+//rodar para testar
+npx eslint index.js
+
