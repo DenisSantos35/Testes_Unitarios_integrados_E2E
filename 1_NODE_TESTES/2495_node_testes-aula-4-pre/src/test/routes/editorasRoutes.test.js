@@ -1,5 +1,6 @@
 import app from '../../app.js'
 import request from 'supertest'
+import {describe, expect, it, jest, } from '@jest/globals'
 //hooks sao ganchos que ajudao nos testes
 
 let server;
@@ -49,12 +50,20 @@ describe("POST em /editoras", ()=>{
 });
 
 describe("PUT EM /editoras/id", ()=>{
-    it("Deve alterar o campo nome", async ()=>{
-        await request(app)
+    test.each([
+        ['nome', {nome: 'Casa do codigo'}], //primeiro
+        ['cidade',{cidade: 'SP' }],  //segundo 
+       ['email', {email: 'cdc@cdc.com'}], // terceiro
+    ])("Deve alterar o campo %s", async (chave, param)=>{
+        const requisicao = { request };
+        const spy = jest.spyOn(requisicao, 'request');
+
+        await requisicao.request(app)
             .put(`/editoras/${idResposta}`)
-            .send({nome: `Casa do Código`})
+            .send(param)
             .expect(204);
-    })
+        expect(spy).toHaveBeenCalled();
+    });
 });
 
 describe('DELETE /editoras/id', () => {
@@ -62,8 +71,8 @@ describe('DELETE /editoras/id', () => {
         await request(app)
                 .delete(`/editoras/${idResposta}`)
                 .expect(200)
-    })
-})
+    });
+});
 
 describe('GET em /editoras/id', () => {
     it("Buscar tetornar o recurso selecionado", async () => {
